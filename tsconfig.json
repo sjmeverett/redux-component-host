@@ -6,8 +6,8 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "jsx": "react",
-    "experimentalDecorators": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true
   },
   "include": [
     "src/**/*",
