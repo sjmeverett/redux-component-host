@@ -12,7 +12,7 @@ $ npm install --save redux-component-host
 
 Quick start:
 
-```ts
+```js
 import { AppState } from './state';
 import createHistory from 'history/createBrowserHistory';
 import ComponentHost from 'redux-component-host';
@@ -28,7 +28,7 @@ host.render(history);
 
 The `loadComponents` method looks for files called 'component' or '[something].component', and requires them.  Then it looks for a function called `initReduxComponent` (by default) and invokes it, passing the `ComponentHost` instance.  The function can then register reducers, state, routes, etc.
 
-```ts
+```js
 export function initReduxComponent(host: ComponentHost<AppState>) {
   host
     .addReducer({users: reducer})
@@ -43,7 +43,7 @@ A "section" is an area on a rendered page which shows one or more of a number of
 
 The example below defines an extra section called "nav", and shows how it can be used to construct a navigation area:
 
-```tsx
+```jsx
 // this dummy interface will constrain the names that are allowed to
 // be supplied to `addPart` and `getSection`
 interface Sections { main; nav; }
