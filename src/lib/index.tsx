@@ -111,21 +111,17 @@ export default class ComponentHost<TState, TSections extends DefaultSections = D
   }
 
   /**
-   * Automagically loads components from the specified directory.  The specified directory
-   * is searched recursively for "component" and "foo.component" modules by default, or
-   * matching the specified regex otherwise.  By default it looks for an exported function called
-   * `initReduxComponent`, and runs it with this host as the first argument, and a 'wait-for-dependencies'
-   * waiter as the second argument.
-   * @param dirname the directory to search in
-   * @param regex a regex to match file names
+   * Automagically loads components from using the specified webpack require context.  By default it
+   * looks for an exported function called `initReduxComponent`, and runs it with this host as the
+   * first argument, and a 'wait-for-dependencies' waiter as the second argument.
+   * @param requireContext a webpack require.context result
    * @param fnName the name of the function to run
    */
-  loadComponents(dirname: string, regex = /[\/\.]component$/, fnName = 'initReduxComponent') {
-    const req = require['context'](dirname, true, regex);
+  loadComponents(requireContext, fnName = 'initReduxComponent') {
     const wait = new WaitForFunction();
 
-    const initFns = req.keys()
-      .map((key) => req(key).initReduxComponent)
+    const initFns = requireContext.keys()
+      .map((key) => requireContext(key).initReduxComponent)
       .filter((init) => init != null);
 
     return wait.run(initFns, this);

@@ -136,14 +136,13 @@ Adds a page part.
 * `section` - the name of the page section the component is to be rendered in
 * `exact` - whether or not the route matching is to be exact
 
-#### `loadComponents(dirname: string, regex = /[\/\.]component$/, fnName = 'initReduxComponent')`
+#### `loadComponents(requireContext, fnName = 'initReduxComponent')`
 
-Automagically loads components from the specified directory.  The specified directory is searched recursively for "component" and "foo.component" modules by default, or matching the specified regex otherwise.  By default it looks for an exported function called `initReduxComponent`, and runs it with this host as the first argument, and a 'wait-for-dependencies' waiter as the second argument.
+Automagically loads components from using the specified webpack require context.  By default it looks for an exported function called `initReduxComponent`, and runs it with this host as the first argument, and a 'wait-for-dependencies' waiter as the second argument.
 
 **Params**
 
-* `dirname` - the directory to search in
-* `regex` - a regex to match file names
+* `requireContext` - a webpack `require.context()` result
 * `fnName` - the name of the function to run
 
 #### `get store()`
