@@ -121,7 +121,7 @@ export default class ComponentHost<TState, TSections extends DefaultSections = D
    * @param fnName the name of the function to run
    */
   loadComponents(dirname: string, regex = /[\/\.]component$/, fnName = 'initReduxComponent') {
-    const req = require['context'](__dirname, true, regex);
+    const req = require['context'](dirname, true, regex);
     const wait = new WaitForFunction();
 
     const initFns = req.keys()
